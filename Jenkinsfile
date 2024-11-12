@@ -1,6 +1,9 @@
 pipeline {
 
     agent any
+    options {
+        skipStagesAfterUnstable()
+    }
     stages {
         stage('Build') { 
             steps {
@@ -17,5 +20,12 @@ pipeline {
                 }
             }
         }
+        stage('Deliver') {
+            steps {
+                sh './jenkins/scripts/deliver.sh'
+            }
+        }
+
+
     }
 }
